@@ -223,63 +223,48 @@
       <button class="close" onclick="closeLetter()">Cerrar 💖</button>
     </div>
   </div>
+  
+    <script>
+let music;
+let progress;
 
-  <script>
-    function openLetter() {
-      document.querySelector('.envelope').classList.add('open');
-      document.getElementById('content').classList.add('show');
-      const music = document.getElementById('music');
-      if (music) music.play();
-    }
 
-    function closeLetter() {
-      document.querySelector('.envelope').classList.remove('open');
-      document.getElementById('content').classList.remove('show');
-      pauseMusic();
-    }
+document.addEventListener('DOMContentLoaded', () => {
+music = document.getElementById('music');
+progress = document.getElementById('progress');
 
-    function playMusic() {
-      const music = document.getElementById('music');
-      if (music) music.play();
-    }
 
-    function pauseMusic() {
-      const music = document.getElementById('music');
-      if (music) music.pause();
-    }
+music.addEventListener('loadedmetadata', () => {
+progress.max = Math.floor(music.duration);
+});
 
-    function forwardMusic() {
-      const music = document.getElementById('music');
-      if (music) music.currentTime += 10;
-    }
 
-    function playMusic() {
-      const music = document.getElementById('music');
-      if (music) music.play();
-    }
+music.addEventListener('timeupdate', () => {
+progress.value = Math.floor(music.currentTime);
+});
 
-    function pauseMusic() {
-      const music = document.getElementById('music');
-      if (music) music.pause();
-    }
 
-    const music = document.getElementById('music');
-    const progress = document.getElementById('progress');
+progress.addEventListener('input', () => {
+music.currentTime = progress.value;
+});
+});
 
-    if (music && progress) {
-      music.addEventListener('loadedmetadata', () => {
-        progress.max = Math.floor(music.duration);
-      });
 
-      music.addEventListener('timeupdate', () => {
-        progress.value = Math.floor(music.currentTime);
-      });
+function openLetter() {
+document.getElementById('content').classList.add('show');
+if (music) music.play();
+}
 
-      progress.addEventListener('input', () => {
-        music.currentTime = progress.value;
-      });
-    }
-  </script>
+
+function playMusic() {
+if (music) music.play();
+}
+
+
+function pauseMusic() {
+if (music) music.pause();
+}
+</script>
 
 </body>
 </html>
