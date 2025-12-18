@@ -223,48 +223,6 @@
       <button class="close" onclick="closeLetter()">Cerrar 💖</button>
     </div>
   </div>
-  
-    <script>
-let music;
-let progress;
-
-
-document.addEventListener('DOMContentLoaded', () => {
-music = document.getElementById('music');
-progress = document.getElementById('progress');
-
-
-music.addEventListener('loadedmetadata', () => {
-progress.max = Math.floor(music.duration);
-});
-
-
-music.addEventListener('timeupdate', () => {
-progress.value = Math.floor(music.currentTime);
-});
-
-
-progress.addEventListener('input', () => {
-music.currentTime = progress.value;
-});
-});
-
-
-function openLetter() {
-document.getElementById('content').classList.add('show');
-if (music) music.play();
-}
-
-
-function playMusic() {
-if (music) music.play();
-}
-
-
-function pauseMusic() {
-if (music) music.pause();
-}
-</script>
 
 </body>
 </html>
